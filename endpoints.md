@@ -1,4 +1,4 @@
-API Endponits
+API Endpoints
 ================
 
 ## Users

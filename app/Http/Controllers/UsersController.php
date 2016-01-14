@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Transformers\UserTransformer;
+use Uuid;
 use App\User;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller;
+use App\Transformers\UserTransformer;
 
 class UsersController extends Controller
 {
@@ -21,18 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-
         return $this->response->paginator(User::paginate(10), new UserTransformer());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -41,9 +30,13 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CreateUserRequest $request)
     {
-        //
+        $data = $request->except('password_confirmation');
+        $data['password'] = bcrypt($data['password']);
+        $data['uuid'] = Uuid::generate(4)->string;
+        $user = User::create($data);
+        return $this->response->item($user, new UserTransformer());
     }
 
     /**
