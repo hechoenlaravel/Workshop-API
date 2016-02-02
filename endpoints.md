@@ -1,7 +1,7 @@
 API Endpoints
 ================
 
-## Users
+## Users - Protected
 - list
 - create
 - update
