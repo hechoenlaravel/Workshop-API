@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\User;
 use Illuminate\Support\ServiceProvider;
 use Dingo\Api\Auth\Provider\OAuth2;
 
@@ -18,6 +19,9 @@ class OAuthServiceProvider extends ServiceProvider
             $provider = new OAuth2($app['oauth2-server.authorizer']->getChecker());
             $provider->setClientResolver(function ($id) {
                 // Logic to return a client by their ID.
+            });
+            $provider->setUserResolver(function ($id) {
+                // Logic to return a user by their ID.
             });
             return $provider;
         });
