@@ -7,6 +7,7 @@ $api->version('v1', function ($api) {
         $api->post('/auth/authorize-client', 'Auth\OAuthController@authorizeClient');
         $api->group(['middleware' => 'api.auth'], function($api){
             $api->resource('users', 'UsersController');
+            $api->resource('users/{user}/posts', 'UsersPostsController');
             $api->resource('me', 'ProfileController');
         });
     });
