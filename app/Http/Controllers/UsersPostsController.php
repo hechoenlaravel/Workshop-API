@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Transformers\PostTransformer;
 use App\User;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
-use App\Http\Controllers\Controller;
+use App\Transformers\PostTransformer;
 
 class UsersPostsController extends Controller
 {
